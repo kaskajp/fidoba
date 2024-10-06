@@ -16,6 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('feedback') }}" :active="request()->routeIs('feedback')">
+                        {{ __('Feedback') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -122,6 +127,13 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
+
+                <form method="POST" action="{{ route('theme.switch') }}">
+                    @csrf
+                    <button type="submit" name="theme" class="bg-white dark:bg-gray-800 text-black dark:text-white" value="{{ auth()->user()->theme === 'dark' ? 'light' : 'dark' }}">
+                        {{ auth()->user()->theme === 'dark' ? 'Light Mode' : 'Dark Mode' }}
+                    </button>
+                </form>
             </div>
 
             <!-- Hamburger -->
